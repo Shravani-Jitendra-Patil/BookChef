@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookChef System</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @keyframes glitter {
+            0%, 100% { background-position: 0 0; }
+            50% { background-position: 100% 0; }
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #e0eafc 0%, #cfdef3 100%);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(45deg, #3a6073 0%, #16222a 100%);
+            color: #fff;
+            padding: 15px;
+            text-align: right;
+            position: relative;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .header a:hover {
+            color: #a8dadc;
+        }
+        .menu-icon {
+            cursor: pointer;
+            float: left;
+            margin-right: 10px;
+        }
+        .company-name {
+            font-size: 1.5rem;
+            margin-left: 20px;
+        }
+        .menu {
+            background: linear-gradient(45deg, #3a6073 0%, #29323c 100%);
+            padding: 20px;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100vh;
+            overflow-y: auto;
+            transition: left 0.3s ease-in-out;
+            z-index: 1;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu li {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .menu li:first-child a {
+            margin-top: 70px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #34515e;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background: linear-gradient(45deg, #34515e 0%, #3a6073 100%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .menu a:hover {
+            background: linear-gradient(45deg, #34515e 0%, #2c5364 100%);
+        }
+        .menu a.active {
+            background: linear-gradient(45deg, #2c5364 0%, #3a6073 100%);
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            background: linear-gradient(to right, #e0eafc 0%, #cfdef3 100%);
+        }
+        .main-content .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        .login-form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(to right, #e0eafc 0%, #cfdef3 100%);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            animation: glitter 2s infinite linear;
+        }
+        .login-form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #34515e;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #34515e;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: #34515e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #3a6073;
+        }
+        .footer {
+            background: linear-gradient(45deg, #3a6073 0%, #29323c 100%);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="btn btn-primary menu-icon" onclick="toggleMenu()">Menu</button>
+        <div class="company-name">BookChef</div>
+    </header>
+    <nav class="menu">
+        <ul>
+            <li><a href="admin_login.html" class="admin">Admin</a></li>
+            <li><a href="chef_login.html" class="chef">Chef</a></li>
+            <li><a href="users_login.html" class="users">Users</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <img src="https://chefkart-strapi-media.s3.ap-south-1.amazonaws.com/Website_banner_01_web_1_40ea9de1d0.webp" alt="Background Image" class="background-img">
+        <div class="login-form-container">
+            <h2>Admin Login</h2>
+            <form id="adminLoginForm" action="Admin_Login" method="post" onsubmit="return validateLoginForm()">
+                <div class="form-group">
+                    <label for="aemail">Email</label>
+                    <input type="email" id="aemail" name="aemail" required>
+                </div>
+                <div class="form-group">
+                    <label for="apassword">Password</label>
+                    <input type="password" id="apassword" name="apassword" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="footer">
+        Made with love | Shravani Patil &copy; 2024
+    </footer>
+    <script>
+        function toggleMenu() {
+            let menu = document.querySelector('.menu');
+            let mainContent = document.querySelector('.main-content');
+            if (menu.style.left === '0px') {
+                menu.style.left = '-250px';
+                mainContent.style.marginLeft = '0';
+            } else {
+                menu.style.left = '0px';
+                mainContent.style.marginLeft = '250px';
+            }
+        }
+
+        function validateLoginForm() {
+            let email = document.getElementById('aemail').value.trim();
+            let password = document.getElementById('apassword').value.trim();
+
+            if (email === '' || password === '') {
+                alert('Email and Password are required!');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

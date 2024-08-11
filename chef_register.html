@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: right;
+            position: relative;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .header a:hover {
+            color: #ccc;
+        }
+        .menu-icon {
+            cursor: pointer;
+            float: left;
+            margin-right: 10px;
+        }
+        .company-name {
+            font-size: 1.5rem;
+            margin-left: 20px;
+        }
+        .menu {
+            background-color: #444;
+            padding: 20px;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100vh;
+            overflow-y: auto;
+            transition: left 0.3s ease-in-out;
+            z-index: 1;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .menu li {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .menu li:first-child a {
+            margin-top: 70px;
+        }
+        .menu a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .menu a:hover {
+            background-color: #666;
+        }
+        .menu a.active {
+            background-color: #007bff;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .main-content .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .register-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .register-form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .form-group .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-group .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .form-group .login-link a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+            position: relative;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <button class="btn btn-primary menu-icon" onclick="toggleMenu()">Menu</button>
+        <div class="company-name">BookChef</div>
+    </header>
+    <nav class="menu">
+        <ul>
+            <li><a href="admin_login.html" class="admin">Admin</a></li>
+            <li><a href="chef_login.html" class="chef">Chef</a></li>
+            <li><a href="users_login.html" class="users">Users</a></li>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <img src="https://media.istockphoto.com/id/480379752/photo/cook-decorating-a-plate.jpg?s=612x612&w=0&k=20&c=hPxt_XDChTVm219Twis4LWVX6zmw_191A6IVsjxLJdM=" alt="Background Image" class="background-img">
+        <div class="register-form-container">
+            <h2>Chef Register</h2>
+            <form id="chefRegisterForm" action="ChefRegister" method="post" onsubmit="return validateRegisterForm()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="cname" required>
+                </div>
+                <div class="form-group">
+                    <label for="speciality">Speciality</label>
+                    <input type="text" id="speciality" name="cspeciality" required>
+                </div>
+                <div class="form-group">
+                    <label for="openingTime">Opening Time</label>
+                    <input type="time" id="openingTime" name="copenTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="closingTime">Closing Time</label>
+                    <input type="time" id="closingTime" name="ccloseTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="caddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="area">Area</label>
+                    <input type="text" id="area" name="carea" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="ccity" required>
+                </div>
+                <div class="form-group">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" name="cpincode" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact</label>
+                    <input type="text" id="contact" name="ccontact" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="cemail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="cpassword" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                    <div class="login-link">
+                        <a href="chef_login.html">Already have an account? Login</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="footer">
+        Made with love | Shravani Patil &copy; 2024
+    </footer>
+    <script>
+        function toggleMenu() {
+            let menu = document.querySelector('.menu');
+            let mainContent = document.querySelector('.main-content');
+            if (menu.style.left === '0px') {
+                menu.style.left = '-250px';
+                mainContent.style.marginLeft = '0';
+            } else {
+                menu.style.left = '0px';
+                mainContent.style.marginLeft = '250px';
+            }
+        }
+
+        function validateRegisterForm() {
+            let name = document.getElementById('name').value.trim();
+            let speciality = document.getElementById('speciality').value.trim();
+            let openTime = document.getElementById('openingTime').value.trim();
+            let closeTime = document.getElementById('closingTime').value.trim();
+            let address = document.getElementById('address').value.trim();
+            let area = document.getElementById('area').value.trim();
+            let city = document.getElementById('city').value.trim();
+            let pincode = document.getElementById('pincode').value.trim();
+            let contact = document.getElementById('contact').value.trim();
+            let email = document.getElementById('email').value.trim();
+            let password = document.getElementById('password').value.trim();
+
+            if (name === '' || speciality === '' || openTime === '' || closeTime === '' || address === '' || area === '' || city === '' || pincode === '' || contact === '' || email === '' || password === '') {
+                alert('Please fill in all fields.');
+                return false;
+            }
+
+            // Custom validation for closing time
+            if (closeTime === '') {
+                alert('Closing Time cannot be empty.');
+                return false;
+            }
+
+            // Add additional validation rules as needed
+
+            return true;
+        }
+    </script>
+</body>
+</html>
